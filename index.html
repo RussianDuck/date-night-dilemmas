@@ -3,19 +3,51 @@
 
 <head>
   <title>Date Night Dilemma</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow&family=Dancing+Script&family=Rubik+Moonrocks&family=Source+Serif+Pro&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/style.css" />
 </head>
 
 <body>
-  <header>
-    <h1>Date Night Dilemma</h1>
-    <p>Avoid the arguments and delays - just pick a recommendation and chill</p>
+  <header class="container is-fluid">
+    <h1 class="header"><span id="date">Date </span><span id="night">Night </span><span id="dilemma">Dilemma</span></h1>
   </header>
+  <section class="hero is-info">
+    <div class="hero-body info">
+      <p class="title">
+        Info hero
+      </p>
+      <p class="subtitle">
+        information about the site
+      </p>
+    </div>
+  </section>
   <main>
+    <div class="select">
+      <h2 id="genre">Select your genre!</h2>
+      <select>
+        <option>Action</option>
+        <option>Adventure</option>
+        <option>Animation</option>
+        <option>Comedy</option>
+        <option>Crime</option>
+        <option>Documentary</option>
+        <option>Drama</option>
+        <option>Family</option>
+        <option>Fantasy</option>
+        <option>History</option>
+        <option>Horror</option>
+        <option>Music</option>
+        <option>Mystery</option>
+        <option>Romance</option>
+        <option>SciFi</option>
+        <option>Thriller</option>
+        <option>War</option>
+        <option>Western</option>
+      </select>
+    </div>
     <section id="about">
         <p>Pick a movie...</p>
     </section>
@@ -30,7 +62,7 @@
         </ul>
     </section>
     <section id="watch-later">
-        <ul id"watch-list">
+        <ul id = "watch-list">
             <!--
             <div class=row>    
                 <li></li>
