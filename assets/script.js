@@ -44,30 +44,33 @@ function getAPI(){
         .then(function (data) {
         // Use the console to examine the response
         console.log(data);
-        generateCards(data.results);
+        for (var i = 0; i<3; i++) {
+            var index = getRandomNumber(20);
+            console.log('index: ' + index)
+            generateCards(data.results[index]);
+        }
         });
 }
 
-function generateCards(results) {
+function generateCards(result) {
   let movieContainer = document.getElementById("movie-container");
-  movieContainer.innerHTML = '';
-  results.forEach(result => { 
-        console.log('Title: ' + result.title);
+  //movieContainer.innerHTML = '';
+        // console.log('Title: ' + result.title);
         let movieCard = document.createElement("article");
         let movieTitle = document.createElement("h3");
         movieTitle.textContent = result.title;
-        console.log('Year: ' + result.release_date);
+        // console.log('Year: ' + result.release_date);
         let movieYear = document.createElement("p");
         movieYear.textContent = result.release_date;
-        console.log('Id: ' + result.id);
-        console.log('Rating: ' + result.vote_average);
+        // console.log('Id: ' + result.id);
+        // console.log('Rating: ' + result.vote_average);
         let movieRating = document.createElement("p");
         movieRating.textContent = result.vote_average;
-        movieContainer.appendChild(movieCard);
+        
         movieCard.appendChild(movieTitle);
         movieCard.appendChild(movieYear);
         movieCard.appendChild(movieRating);
-    });
+        movieContainer.appendChild(movieCard);
 }
 
 // add-to favorites button
