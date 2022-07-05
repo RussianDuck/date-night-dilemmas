@@ -12,7 +12,7 @@ var movieSearchBaseURL = 'https://advanced-movie-search.p.rapidapi.com/discover/
 var movieSearchAPIKey = 'rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b';
 var movieSearchGenreId = '&with_genres=';
 
-var requestURL = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b&with_genres=27'
+var requestURL; // = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b&with_genres=27'
 
 const genreIds = {
     Action: 28,
@@ -37,6 +37,10 @@ const genreIds = {
 };
 
 function getAPI(){
+    var selectedGenre = $('#selection').val();
+    var genreId = genreIds[selectedGenre];
+    requestURL = movieSearchBaseURL + movieSearchAPIKey + movieSearchGenreId + genreId;
+    console.log('requestURL: ' + requestURL);
     fetch(requestURL)
         .then(function (response) {
         return response.json();
@@ -77,6 +81,7 @@ function generateCards(result) {
 // add-to favorites button
 
 $('#search').on('click', function () {
+    clearResults();
     getAPI();
 }) 
 
@@ -90,3 +95,7 @@ function getRandomNumber(max) {
 var number = getRandomNumber(20);
 console.log(number);
 
+function clearResults() {
+    let movieContainer = document.getElementById("movie-container");
+    movieContainer.innerHTML = '';
+}
