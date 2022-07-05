@@ -44,15 +44,33 @@ function getAPI(){
         .then(function (data) {
         // Use the console to examine the response
         console.log(data);
-        data.results.forEach(result => {
-        //for(var i = 0; i<data.length; i++) {  
-            console.log('Title: ' + result.title);
-            console.log('Year: ' + result.release_date);
-            console.log('Id: ' + result.id);
-            console.log('Rating: ' + result.vote_average);
-        });
+        generateCards(data.results);
         });
 }
+
+function generateCards(results) {
+  let movieContainer = document.getElementById("movie-container");
+  movieContainer.innerHTML = '';
+  results.forEach(result => { 
+        console.log('Title: ' + result.title);
+        let movieCard = document.createElement("article");
+        let movieTitle = document.createElement("h3");
+        movieTitle.textContent = result.title;
+        console.log('Year: ' + result.release_date);
+        let movieYear = document.createElement("p");
+        movieYear.textContent = result.release_date;
+        console.log('Id: ' + result.id);
+        console.log('Rating: ' + result.vote_average);
+        let movieRating = document.createElement("p");
+        movieRating.textContent = result.vote_average;
+        movieContainer.appendChild(movieCard);
+        movieCard.appendChild(movieTitle);
+        movieCard.appendChild(movieYear);
+        movieCard.appendChild(movieRating);
+    });
+}
+
+// add-to favorites button
 
 $('#search').on('click', function () {
     getAPI();
@@ -67,3 +85,4 @@ function getRandomNumber(max) {
 
 var number = getRandomNumber(20);
 console.log(number);
+
