@@ -1,17 +1,19 @@
 // Javascript file for Project 1
-/*
 var imdbApiKey = 'k_td78lkkw';
+
 var omdbUrl = 'https://www.omdbapi.com/';
 var omdbApiKey = '?apikey=f40119aa';
 var omdbTitle = '&t=Nope';
 var omdbYear = '&y=2022';
 var omdbPlot = '&plot=full';
-*/
 
 var movieSearchBaseURL = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?';
 var movieSearchAPIKey = 'rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b';
 var movieSearchGenreId = '&with_genres=';
 
+// var requestURL = omdbUrl+omdbApiKey+omdbTitle+omdbYear+omdbPlot;
+// var requestURL = 'http://www.omdbapi.com/?apikey=f40119aa&t=Top+Gun%3A+Maverick&y=2022&plot=full'
+// var requestURL = 'http://www.omdbapi.com/?apikey=f40119aa&s=horror&type=movie&y=2022'
 var requestURL = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b&with_genres=27'
 
 const genreIds = {
@@ -44,38 +46,17 @@ function getAPI(){
         .then(function (data) {
         // Use the console to examine the response
         console.log(data);
-        for (var i = 0; i<3; i++) {
-            var index = getRandomNumber(20);
-            console.log('index: ' + index)
-            generateCards(data.results[index]);
-        }
+        data.results.forEach(result => {
+        //for(var i = 0; i<data.length; i++) {  
+            console.log('Title: ' + result.title);
+            console.log('Year: ' + result.release_date);
+            console.log('Id: ' + result.id);
+            console.log('Rating: ' + result.vote_average);
+        });
         });
 }
 
-function generateCards(result) {
-  let movieContainer = document.getElementById("movie-container");
-  //movieContainer.innerHTML = '';
-        // console.log('Title: ' + result.title);
-        let movieCard = document.createElement("article");
-        let movieTitle = document.createElement("h3");
-        movieTitle.textContent = result.title;
-        // console.log('Year: ' + result.release_date);
-        let movieYear = document.createElement("p");
-        movieYear.textContent = result.release_date;
-        // console.log('Id: ' + result.id);
-        // console.log('Rating: ' + result.vote_average);
-        let movieRating = document.createElement("p");
-        movieRating.textContent = result.vote_average;
-        
-        movieCard.appendChild(movieTitle);
-        movieCard.appendChild(movieYear);
-        movieCard.appendChild(movieRating);
-        movieContainer.appendChild(movieCard);
-}
-
-// add-to favorites button
-
-$('#search').on('click', function () {
+$('#search').on(function () {
     getAPI();
 }) 
 
@@ -88,4 +69,3 @@ function getRandomNumber(max) {
 
 var number = getRandomNumber(20);
 console.log(number);
-
