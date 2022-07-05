@@ -61,7 +61,8 @@ function generateCards(result) {
         movieTitle.textContent = result.title;
         // console.log('Year: ' + result.release_date);
         let movieYear = document.createElement("p");
-        movieYear.textContent = result.release_date;
+        var formattedYear = moment(result.release_date).format('YYYY');
+        movieYear.textContent = formattedYear;
         // console.log('Id: ' + result.id);
         // console.log('Rating: ' + result.vote_average);
         let movieRating = document.createElement("p");
