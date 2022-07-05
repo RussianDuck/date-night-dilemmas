@@ -70,8 +70,6 @@ function generateCards(results) {
     });
 }
 
-// add-to favorites button
-
 $('#search').on('click', function () {
     getAPI();
 }) 
@@ -86,3 +84,25 @@ function getRandomNumber(max) {
 var number = getRandomNumber(20);
 console.log(number);
 
+const dinnerOptions = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '8c97389987msh6d23c292611734dp107e9bjsneac2ea684be8',
+		'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
+	}
+};
+
+fetch('https://edamam-recipe-search.p.rapidapi.com/search?q=chicken', dinnerOptions)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+
+// add-to favorites button
+function addToFavorites() {
+  var addButton = document.querySelector("#add");
+  var favorites = localStorage.getItem("favorites");
+
+  addButton.addEventListener("click", function() {
+  
+  })
+}
