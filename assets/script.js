@@ -78,8 +78,6 @@ function generateCards(result) {
         movieContainer.appendChild(movieCard);
 }
 
-// add-to favorites button
-
 $('#search').on('click', function () {
     clearResults();
     getAPI();
@@ -95,7 +93,18 @@ function getRandomNumber(max) {
 var number = getRandomNumber(20);
 console.log(number);
 
+// add favorites button
+function addToFavorites() {
+  var addButton = document.querySelector("#add");
+  var favorites = localStorage.getItem("favorites");
+
+  addButton.addEventListener("click", function() {
+  
+  })
+}
+
 function clearResults() {
     let movieContainer = document.getElementById("movie-container");
     movieContainer.innerHTML = '';
 }
+
