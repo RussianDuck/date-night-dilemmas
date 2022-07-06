@@ -1,13 +1,3 @@
-// Javascript file for Project 1
-/*
-var imdbApiKey = 'k_td78lkkw';
-var omdbUrl = 'https://www.omdbapi.com/';
-var omdbApiKey = '?apikey=f40119aa';
-var omdbTitle = '&t=Nope';
-var omdbYear = '&y=2022';
-var omdbPlot = '&plot=full';
-*/
-
 var movieSearchBaseURL = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?';
 var movieSearchAPIKey = 'rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b';
 var movieSearchGenreId = '&with_genres=';
@@ -36,7 +26,7 @@ const genreIds = {
     Western: 37,
 };
 
-function getAPI(){
+function getMovies(){
     var selectedGenre = $('#selection').val();
     var genreId = genreIds[selectedGenre];
     requestURL = movieSearchBaseURL + movieSearchAPIKey + movieSearchGenreId + genreId;
@@ -57,32 +47,26 @@ function getAPI(){
 }
 
 function generateCards(result) {
-  let movieContainer = document.getElementById("movie-container");
-  //movieContainer.innerHTML = '';
-        // console.log('Title: ' + result.title);
-        let movieCard = document.createElement("article");
-        let movieTitle = document.createElement("h3");
-        movieTitle.textContent = result.title;
-        // console.log('Year: ' + result.release_date);
-        let movieYear = document.createElement("p");
-        var formattedYear = moment(result.release_date).format('YYYY');
-        movieYear.textContent = formattedYear;
-        // console.log('Id: ' + result.id);
-        // console.log('Rating: ' + result.vote_average);
-        let movieRating = document.createElement("p");
-        movieRating.textContent = result.vote_average;
-        
-        movieCard.appendChild(movieTitle);
-        movieCard.appendChild(movieYear);
-        movieCard.appendChild(movieRating);
-        movieContainer.appendChild(movieCard);
+    let movieContainer = document.getElementById("movie-container");
+    let movieCard = document.createElement("article");
+    let movieTitle = document.createElement("h3");
+    movieTitle.textContent = result.title;
+    let movieYear = document.createElement("p");
+    var formattedYear = moment(result.release_date).format('YYYY');
+    movieYear.textContent = 'Year Released: ' + formattedYear;
+    let movieRating = document.createElement("p");
+    movieRating.textContent = 'Rating: ' + result.vote_average;
+    movieCard.appendChild(movieTitle);
+    movieCard.appendChild(movieYear);
+    movieCard.appendChild(movieRating);
+    movieContainer.appendChild(movieCard);
 }
 
 // add-to favorites button
 
 $('#search').on('click', function () {
     clearResults();
-    getAPI();
+    getMovies();
 }) 
 
 // get a random number from the array length
