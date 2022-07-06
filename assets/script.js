@@ -97,7 +97,7 @@ fetch('https://edamam-recipe-search.p.rapidapi.com/search?q=chicken', dinnerOpti
 	.then(response => console.log(response))
 	.catch(err => console.error(err));
 
-// add-to favorites button
+// add favorites button
 function addToFavorites() {
   var addButton = document.querySelector("#add");
   var favorites = localStorage.getItem("favorites");
