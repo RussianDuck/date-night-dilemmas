@@ -12,7 +12,7 @@ var movieSearchBaseURL = 'https://advanced-movie-search.p.rapidapi.com/discover/
 var movieSearchAPIKey = 'rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b';
 var movieSearchGenreId = '&with_genres=';
 
-var requestURL = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b&with_genres=27'
+var requestURL; // = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b&with_genres=27'
 
 const genreIds = {
     Action: 28,
@@ -37,6 +37,10 @@ const genreIds = {
 };
 
 function getAPI(){
+    var selectedGenre = $('#selection').val();
+    var genreId = genreIds[selectedGenre];
+    requestURL = movieSearchBaseURL + movieSearchAPIKey + movieSearchGenreId + genreId;
+    console.log('requestURL: ' + requestURL);
     fetch(requestURL)
         .then(function (response) {
         return response.json();
@@ -44,33 +48,38 @@ function getAPI(){
         .then(function (data) {
         // Use the console to examine the response
         console.log(data);
-        generateCards(data.results);
+        for (var i = 0; i<3; i++) {
+            var index = getRandomNumber(20);
+            console.log('index: ' + index)
+            generateCards(data.results[index]);
+        }
         });
 }
 
-function generateCards(results) {
+function generateCards(result) {
   let movieContainer = document.getElementById("movie-container");
-  movieContainer.innerHTML = '';
-  results.forEach(result => { 
-        console.log('Title: ' + result.title);
+  //movieContainer.innerHTML = '';
+        // console.log('Title: ' + result.title);
         let movieCard = document.createElement("article");
         let movieTitle = document.createElement("h3");
         movieTitle.textContent = result.title;
-        console.log('Year: ' + result.release_date);
+        // console.log('Year: ' + result.release_date);
         let movieYear = document.createElement("p");
-        movieYear.textContent = result.release_date;
-        console.log('Id: ' + result.id);
-        console.log('Rating: ' + result.vote_average);
+        var formattedYear = moment(result.release_date).format('YYYY');
+        movieYear.textContent = formattedYear;
+        // console.log('Id: ' + result.id);
+        // console.log('Rating: ' + result.vote_average);
         let movieRating = document.createElement("p");
         movieRating.textContent = result.vote_average;
-        movieContainer.appendChild(movieCard);
+        
         movieCard.appendChild(movieTitle);
         movieCard.appendChild(movieYear);
         movieCard.appendChild(movieRating);
-    });
+        movieContainer.appendChild(movieCard);
 }
 
 $('#search').on('click', function () {
+    clearResults();
     getAPI();
 }) 
 
@@ -84,19 +93,6 @@ function getRandomNumber(max) {
 var number = getRandomNumber(20);
 console.log(number);
 
-const dinnerOptions = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '8c97389987msh6d23c292611734dp107e9bjsneac2ea684be8',
-		'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com'
-	}
-};
-
-fetch('https://edamam-recipe-search.p.rapidapi.com/search?q=chicken', dinnerOptions)
-	.then(response => response.json())
-	.then(response => console.log(response))
-	.catch(err => console.error(err));
-
 // add favorites button
 function addToFavorites() {
   var addButton = document.querySelector("#add");
@@ -106,3 +102,9 @@ function addToFavorites() {
   
   })
 }
+
+function clearResults() {
+    let movieContainer = document.getElementById("movie-container");
+    movieContainer.innerHTML = '';
+}
+
