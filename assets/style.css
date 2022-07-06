@@ -37,3 +37,59 @@
 .info{
   background-color: rgb(220, 20, 20);
 }
+
+article{
+  display: table-cell;
+  padding: 80px;
+  font-size: 20px;
+  border: 1rem solid;
+  border-color: blue;
+  background-color: azure;
+}
+
+article:hover{
+  background-color: lightcoral;
+}
+
+h3{
+  font-size: larger;
+  color: black;
+  font-weight: bolder;
+}
+
+p{
+  color: dimgrey;
+}
+
+#movie-container{
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+select{
+  margin-left: 50px;
+  background-color: rgb(196, 255, 204);
+  color: black;
+  font-size: large;
+  font-weight: bold;
+}
+
+select:hover{
+  background-color: rgb(255, 45, 45);
+}
+
+#genre{
+  font-size: larger;
+}
+
+main{
+  margin-left: 5%;
+}
+
+#search{
+  position: relative;
+  margin-top: 32px;
+  margin-left: 140px;
+}
