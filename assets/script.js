@@ -1,18 +1,8 @@
-// Javascript file for Project 1
-/*
-var imdbApiKey = 'k_td78lkkw';
-var omdbUrl = 'https://www.omdbapi.com/';
-var omdbApiKey = '?apikey=f40119aa';
-var omdbTitle = '&t=Nope';
-var omdbYear = '&y=2022';
-var omdbPlot = '&plot=full';
-*/
+var movieContainerEl = document.getElementById("movie-container");
 
 var movieSearchBaseURL = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?';
 var movieSearchAPIKey = 'rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b';
 var movieSearchGenreId = '&with_genres=';
-
-var requestURL = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b&with_genres=27'
 
 const genreIds = {
     Action: 28,
@@ -30,13 +20,15 @@ const genreIds = {
     Mystery: 9648,
     Romance: 10749,
     SciFi: 878,
-    //TV Movie: 10770,
     Thriller: 53,
     War: 10752,
     Western: 37,
 };
 
-function getAPI(){
+function getMovies(){
+    var genreId = genreIds[$('#selection').val()];
+    var requestURL = movieSearchBaseURL + movieSearchAPIKey + movieSearchGenreId + genreId;
+    console.log('requestURL: ' + requestURL);
     fetch(requestURL)
         .then(function (response) {
         return response.json();
@@ -52,31 +44,59 @@ function getAPI(){
         });
 }
 
-function generateCards(result) {
-  let movieContainer = document.getElementById("movie-container");
-  //movieContainer.innerHTML = '';
-        // console.log('Title: ' + result.title);
-        let movieCard = document.createElement("article");
-        let movieTitle = document.createElement("h3");
-        movieTitle.textContent = result.title;
-        // console.log('Year: ' + result.release_date);
-        let movieYear = document.createElement("p");
-        movieYear.textContent = result.release_date;
-        // console.log('Id: ' + result.id);
-        // console.log('Rating: ' + result.vote_average);
-        let movieRating = document.createElement("p");
-        movieRating.textContent = result.vote_average;
-        
-        movieCard.appendChild(movieTitle);
-        movieCard.appendChild(movieYear);
-        movieCard.appendChild(movieRating);
-        movieContainer.appendChild(movieCard);
+
+function getRecipes() {
+    // https://rapidapi.com/forlucas27/api/random-recipes/
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': 'a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b',
+            'X-RapidAPI-Host': 'random-recipes.p.rapidapi.com'
+        }
+    };
+    
+    fetch('https://random-recipes.p.rapidapi.com/ai-quotes/1', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
 }
 
-// add-to favorites button
+function getCocktail() {
+    // https://rapidapi.com/Bmbus/api/cocktails3/
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': 'a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b',
+            'X-RapidAPI-Host': 'cocktails3.p.rapidapi.com'
+        }
+    };
+    
+    fetch('https://cocktails3.p.rapidapi.com/random', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+}
+
+function generateCards(result) {
+    let movieCard = document.createElement("article");
+    let movieTitle = document.createElement("h3");
+    movieTitle.textContent = result.title;
+    let movieYear = document.createElement("p");
+    var formattedYear = moment(result.release_date).format('YYYY');
+    movieYear.textContent = 'Year Released: ' + formattedYear;
+    let movieRating = document.createElement("p");
+    movieRating.textContent = 'Rating: ' + result.vote_average;
+    movieCard.appendChild(movieTitle);
+    movieCard.appendChild(movieYear);
+    movieCard.appendChild(movieRating);
+    movieContainerEl.appendChild(movieCard);
+}
 
 $('#search').on('click', function () {
-    getAPI();
+    clearResults();
+    getMovies();
+    getRecipes();
+    getCocktail();
 }) 
 
 // get a random number from the array length
@@ -86,6 +106,16 @@ function getRandomNumber(max) {
     return Math.floor(Math.random() * (max-min) + min);
 }
 
-var number = getRandomNumber(20);
-console.log(number);
+// add favorites button
+function addToFavorites() {
+  var addButton = document.querySelector("#add");
+  var favorites = localStorage.getItem("favorites");
 
+  addButton.addEventListener("click", function() {
+  
+  })
+}
+
+function clearResults() {
+    movieContainerEl.innerHTML = '';
+}
