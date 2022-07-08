@@ -136,7 +136,7 @@ console.log(number);
 function addToList() {
     var nextTitle = document.querySelector("h3").textContent;
     var displayMovie = document.querySelector(".nextMovie");
-    displayMovie.textContent = nextTitle;
+    displayMovie.innerHTML = nextTitle;
     // console.log("Added");
     localStorage.setItem("nextMovie", nextTitle);
         console.log(nextTitle);
@@ -151,4 +151,11 @@ function clearResults() {
     movieContainerEl.innerHTML = '';
     recipeContainerEl.innerHTML = '';
     cocktailContainerEl.innerHTML = '';
+}
+
+// loads and displays localStorage on page
+function loadLocalStorage() {
+    localStorage.getItem("nextMovie");
+    var displayStorage = document.querySelector(".nextMovie")
+    displayStorage.innerHTML = localStorage.nextMovie;
 }
