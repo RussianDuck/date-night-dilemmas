@@ -1,11 +1,5 @@
 var movieContainerEl = document.getElementById('movie-container');
 var recipeContainerEl = document.getElementById('recipe-container');
-var cocktailContainerEl = document.getElementById('cocktail-container');
-
-var recipeNameEl = document.getElementById('recipe-name');
-var recipeIngredientListEl = document.getElementById('recipe-ingredient-list');
-var cocktailNameEl = document.getElementById('cocktail-name');
-var cocktailIngredientListEl = document.getElementById('cocktail-ingredient-list');
 
 var movieSearchBaseURL = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?';
 var movieSearchAPIKey = 'rapidapi-key=8c97389987msh6d23c292611734dp107e9bjsneac2ea684be8';
@@ -45,14 +39,13 @@ function getMovies(){
         console.log(data);
         for (var i = 0; i<3; i++) {
             var index = getRandomNumber(20);
-            console.log('index: ' + index)
             generateCards(data.results[index]);
         }
         });
 }
 
 
-function getRecipes() {
+function getRecipe() {
     // https://rapidapi.com/forlucas27/api/random-recipes/
     const options = {
         method: 'GET',
@@ -72,13 +65,14 @@ function getRecipes() {
             recipeNameEl.textContent = 'Your Random Recipe: ' + data[0].title;
 
             var recipeIngredientsHeaderEl = document.createElement('h3');
+            var recipeImageEl = document.createElement('img');
+            recipeImageEl.setAttribute('src', data[0].image);
             recipeIngredientsHeaderEl.textContent = 'Ingredient List:';
             var recipeIngredientListEl = document.createElement('ol');
             var recipeStepsHeaderEl = document.createElement('h3');
             recipeStepsHeaderEl.textContent = 'Recipe Steps:'
             var recipeStepListEL = document.createElement('ol');
 
-            console.log('recipe title: ' + recipeNameEl.textContent)
             for (var i = 0; i<data[0].ingredients.length; i++) {
                 var recipeIngredientItemEl = document.createElement("li");
                 recipeIngredientItemEl.textContent = data[0].ingredients[i];
@@ -87,12 +81,12 @@ function getRecipes() {
 
             for(var j = 0; j<data[0].instructions.length; j++) {
                 var recipeStepItemEl = document.createElement("li");
-                console.log('look here: ' + data[0].instructions[j].text);
                 recipeStepItemEl.textContent = data[0].instructions[j].text;
                 recipeStepListEL.appendChild(recipeStepItemEl);
             }
 
             recipeContainerEl.appendChild(recipeNameEl);
+            recipeContainerEl.appendChild(recipeImageEl);
             recipeContainerEl.appendChild(recipeIngredientsHeaderEl);
             recipeContainerEl.appendChild(recipeIngredientListEl);
             recipeContainerEl.appendChild(recipeStepsHeaderEl);
@@ -102,13 +96,17 @@ function getRecipes() {
 
 function generateCards(result) {
     let movieCard = document.createElement("article");
+    movieCard.style.backgroundImage = 'url(' + result.backdrop_path + ')';
     let movieTitle = document.createElement("h3");
+    let moviePoster = document.createElement('img');
+    moviePoster.setAttribute('src', result.poster_path);
     movieTitle.textContent = result.title;
     let movieYear = document.createElement("p");
-    var formattedYear = moment(result.release_date).format('YYYY');
+    let formattedYear = moment(result.release_date).format('YYYY');
     movieYear.textContent = 'Year Released: ' + formattedYear;
     let movieRating = document.createElement("p");
     movieRating.textContent = 'Rating: ' + result.vote_average;
+    movieCard.appendChild(moviePoster);
     movieCard.appendChild(movieTitle);
     movieCard.appendChild(movieYear);
     movieCard.appendChild(movieRating);
@@ -118,8 +116,7 @@ function generateCards(result) {
 $('#search').on('click', function () {
     clearResults();
     getMovies();
-    getRecipes();
-    //getCocktail();
+    getRecipe();;
 }) 
 
 // get a random number from the array length
@@ -129,12 +126,9 @@ function getRandomNumber(max) {
     return Math.floor(Math.random() * (max-min) + min);
 }
 
-var number = getRandomNumber(20);
-console.log(number);
-
 // adds desired movie into list and displays it
 function addToList() {
-    var nextTitle = document.querySelector("h3").textContent;
+    var nextTitle = document.querySelector("h3").textContent
     var displayMovie = document.querySelector(".nextMovie");
     displayMovie.innerHTML = nextTitle;
     // console.log("Added");
@@ -150,7 +144,7 @@ $('#add').on('click', function () {
 function clearResults() {
     movieContainerEl.innerHTML = '';
     recipeContainerEl.innerHTML = '';
-    cocktailContainerEl.innerHTML = '';
+    // cocktailContainerEl.innerHTML = '';
 }
 
 // loads and displays localStorage on page
