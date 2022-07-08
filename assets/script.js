@@ -1,11 +1,5 @@
 var movieContainerEl = document.getElementById('movie-container');
 var recipeContainerEl = document.getElementById('recipe-container');
-var cocktailContainerEl = document.getElementById('cocktail-container');
-
-var recipeNameEl = document.getElementById('recipe-name');
-var recipeIngredientListEl = document.getElementById('recipe-ingredient-list');
-var cocktailNameEl = document.getElementById('cocktail-name');
-var cocktailIngredientListEl = document.getElementById('cocktail-ingredient-list');
 
 var movieSearchBaseURL = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?';
 var movieSearchAPIKey = 'rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b';
@@ -52,7 +46,7 @@ function getMovies(){
 }
 
 
-function getRecipes() {
+function getRecipe() {
     // https://rapidapi.com/forlucas27/api/random-recipes/
     const options = {
         method: 'GET',
@@ -78,7 +72,6 @@ function getRecipes() {
             recipeStepsHeaderEl.textContent = 'Recipe Steps:'
             var recipeStepListEL = document.createElement('ol');
 
-            console.log('recipe title: ' + recipeNameEl.textContent)
             for (var i = 0; i<data[0].ingredients.length; i++) {
                 var recipeIngredientItemEl = document.createElement("li");
                 recipeIngredientItemEl.textContent = data[0].ingredients[i];
@@ -87,7 +80,6 @@ function getRecipes() {
 
             for(var j = 0; j<data[0].instructions.length; j++) {
                 var recipeStepItemEl = document.createElement("li");
-                console.log('look here: ' + data[0].instructions[j].text);
                 recipeStepItemEl.textContent = data[0].instructions[j].text;
                 recipeStepListEL.appendChild(recipeStepItemEl);
             }
@@ -118,8 +110,7 @@ function generateCards(result) {
 $('#search').on('click', function () {
     clearResults();
     getMovies();
-    getRecipes();
-    //getCocktail();
+    getRecipe();;
 }) 
 
 // get a random number from the array length
@@ -142,5 +133,4 @@ function addToFavorites() {
 function clearResults() {
     movieContainerEl.innerHTML = '';
     recipeContainerEl.innerHTML = '';
-    cocktailContainerEl.innerHTML = '';
 }
