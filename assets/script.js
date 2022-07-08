@@ -9,7 +9,7 @@ var omdbPlot = '&plot=full';
 */
 
 var movieSearchBaseURL = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?';
-var movieSearchAPIKey = 'rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b';
+var movieSearchAPIKey = 'rapidapi-key=8c97389987msh6d23c292611734dp107e9bjsneac2ea684be8';
 var movieSearchGenreId = '&with_genres=';
 
 var requestURL; // = 'https://advanced-movie-search.p.rapidapi.com/discover/movie?rapidapi-key=a06e749de5mshd10ecfc282b3b9fp1ee828jsn6b27a3f8a15b&with_genres=27'
@@ -93,15 +93,22 @@ function getRandomNumber(max) {
 var number = getRandomNumber(20);
 console.log(number);
 
-// add favorites button
-function addToFavorites() {
-  var addButton = document.querySelector("#add");
-  var favorites = localStorage.getItem("favorites");
+// var nextMovie = localStorage.getItem("nextMovie");
 
-  addButton.addEventListener("click", function() {
-  
-  })
+// adds desired movie into list and displays it
+function addToList() {
+    var nextTitle = document.querySelector("h3").textContent;
+    var displayMovie = document.querySelector(".nextMovie");
+    displayMovie.textContent = nextTitle;
+    // console.log("Added");
+    localStorage.setItem("nextMovie", nextTitle);
+        console.log(nextTitle);
 }
+
+// clicking the "add to list" button will activate the addToList function
+$('#add').on('click', function () {
+    addToList();
+}) 
 
 function clearResults() {
     let movieContainer = document.getElementById("movie-container");
