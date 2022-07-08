@@ -39,7 +39,6 @@ function getMovies(){
         console.log(data);
         for (var i = 0; i<3; i++) {
             var index = getRandomNumber(20);
-            console.log('index: ' + index)
             generateCards(data.results[index]);
         }
         });
@@ -97,13 +96,17 @@ function getRecipe() {
 
 function generateCards(result) {
     let movieCard = document.createElement("article");
+    movieCard.style.backgroundImage = 'url(' + result.backdrop_path + ')';
     let movieTitle = document.createElement("h3");
+    let moviePoster = document.createElement('img');
+    moviePoster.setAttribute('src', result.poster_path);
     movieTitle.textContent = result.title;
     let movieYear = document.createElement("p");
-    var formattedYear = moment(result.release_date).format('YYYY');
+    let formattedYear = moment(result.release_date).format('YYYY');
     movieYear.textContent = 'Year Released: ' + formattedYear;
     let movieRating = document.createElement("p");
     movieRating.textContent = 'Rating: ' + result.vote_average;
+    movieCard.appendChild(moviePoster);
     movieCard.appendChild(movieTitle);
     movieCard.appendChild(movieYear);
     movieCard.appendChild(movieRating);
@@ -122,9 +125,6 @@ function getRandomNumber(max) {
     var max = Math.floor(max);
     return Math.floor(Math.random() * (max-min) + min);
 }
-
-var number = getRandomNumber(20);
-console.log(number);
 
 // adds desired movie into list and displays it
 function addToList() {
