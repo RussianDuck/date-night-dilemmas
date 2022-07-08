@@ -8,7 +8,6 @@
   font-family: 'Dancing Script', cursive;
   font-size: 6vw;
 }
-
 #night{
   font-family: 'Rubik Moonrocks';
   font-size: 6vw;
@@ -18,7 +17,6 @@
   font-family: 'Archivo Narrow', sans-serif;
   font-size: 5vw;
 }
-
 .header{
   padding-top: 20px;
   text-align: center;
@@ -31,65 +29,63 @@
   color: rgb(0, 0, 0);
 }
 
-.container{
-  border-radius: 25px;
-}
-.info{
+/*hero Styling*/
+.hero-body{
+  padding: .5rem 3rem;
   background-color: rgb(220, 20, 20);
+  text-align: center;
 }
-
-article{
-  display: table-cell;
-  padding: 80px;
-  font-size: 20px;
-  border: 1rem solid;
-  border-color: blue;
-  background-color: azure;
-}
-
-article:hover{
-  background-color: lightcoral;
-}
-
-h3{
-  font-size: larger;
-  color: black;
-  font-weight: bolder;
-}
-
-p{
-  color: dimgrey;
-}
-
-#movie-container{
-  position: fixed;
-  bottom: 60px;
-  left: 50%;
-  transform: translate(-50%);
-}
-
-select{
-  margin-left: 50px;
-  background-color: rgb(196, 255, 204);
-  color: black;
+.title{
   font-size: large;
-  font-weight: bold;
+}
+.subtitle{
+  font-size: medium;
 }
 
-select:hover{
-  background-color: rgb(255, 45, 45);
-}
-
+/*Genre Selection Styling*/
 #genre{
   font-size: larger;
 }
-
 main{
   margin-left: 5%;
 }
-
 #search{
   position: relative;
   margin-top: 32px;
   margin-left: 140px;
 }
+
+/*Random Movie Styling*/
+article{
+  display: table-cell;
+  padding: 2vw;
+  font-size: 20px;
+  border: 1rem solid;
+  border-color: rgb(236, 209, 56);
+  background-color: rgb(255, 255, 255);
+  max-height: 2px;
+}
+article:hover{
+  background-color: rgb(255, 244, 147);
+}
+h3{
+  font-size: larger;
+  color: black;
+  font-weight: bolder;
+}
+p{
+  color: rgb(75, 74, 74);
+}
+#movie-container{
+  max-width: 1000px;
+  margin:auto
+}
+select{
+  margin-left: 50px;
+  font-size: large;
+  font-weight: bold;
+}
+select:hover{
+  background-color: rgb(255, 45, 45);
+}
+
