@@ -10,6 +10,18 @@ hr{
   border: 2px solid red;
   margin-right: 2%;
 }
+
+/*button styling*/
+button{
+  color: black;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  border: 2px solid black;
+}
+button:hover{
+  background-color: rgb(253, 255, 143);
+}
+
 /*Header Styling*/
 #date{
   font-family: 'Dancing Script', cursive;
@@ -93,6 +105,17 @@ select:hover{
   background-color: rgb(255, 45, 45);
 }
 
+/*watchlist styling*/
+.nextMovie{
+  font-size: large;
+  color: black;
+}
+legend{
+  color: black;
+  font-size: large;
+  font-weight: bold;
+}
+
 /* Recipe Styling*/
 h2{
   font-weight: bold;
@@ -100,5 +123,14 @@ h2{
   color: rgb(0, 0, 0);
 }
 li{
+  color: rgb(58, 58, 58);
+  margin-left: 5%;
+}
+img{
+  max-width: 600px;
+  max-height: 600px;
+}
+
+li::marker{
   color: black;
 }
