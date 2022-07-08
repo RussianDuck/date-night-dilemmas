@@ -66,6 +66,8 @@ function getRecipe() {
             recipeNameEl.textContent = 'Your Random Recipe: ' + data[0].title;
 
             var recipeIngredientsHeaderEl = document.createElement('h3');
+            var recipeImageEl = document.createElement('img');
+            recipeImageEl.setAttribute('src', data[0].image);
             recipeIngredientsHeaderEl.textContent = 'Ingredient List:';
             var recipeIngredientListEl = document.createElement('ol');
             var recipeStepsHeaderEl = document.createElement('h3');
@@ -85,6 +87,7 @@ function getRecipe() {
             }
 
             recipeContainerEl.appendChild(recipeNameEl);
+            recipeContainerEl.appendChild(recipeImageEl);
             recipeContainerEl.appendChild(recipeIngredientsHeaderEl);
             recipeContainerEl.appendChild(recipeIngredientListEl);
             recipeContainerEl.appendChild(recipeStepsHeaderEl);
