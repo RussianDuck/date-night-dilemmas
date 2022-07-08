@@ -3,6 +3,13 @@
   background-color: antiquewhite;
 }
 
+main{
+  margin-left: 2%;
+}
+hr{
+  border: 2px solid red;
+  margin-right: 2%;
+}
 /*Header Styling*/
 #date{
   font-family: 'Dancing Script', cursive;
@@ -46,9 +53,6 @@
 #genre{
   font-size: larger;
 }
-main{
-  margin-left: 5%;
-}
 #search{
   position: relative;
   margin-top: 32px;
@@ -89,3 +93,12 @@ select:hover{
   background-color: rgb(255, 45, 45);
 }
 
+/* Recipe Styling*/
+h2{
+  font-weight: bold;
+  font-size: larger;
+  color: rgb(0, 0, 0);
+}
+li{
+  color: black;
+}
