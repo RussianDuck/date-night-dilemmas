@@ -56,9 +56,15 @@ button:hover{
 }
 .title{
   font-size: large;
+  color: white;
+  -webkit-text-stroke-width: 0px;
+  -webkit-text-stroke-color: rgb(255, 255, 255);
 }
 .subtitle{
   font-size: medium;
+  color: white;
+  -webkit-text-stroke-width: 0px;
+  -webkit-text-stroke-color: black;
 }
 
 /*Genre Selection Styling*/
@@ -69,6 +75,14 @@ button:hover{
   position: relative;
   margin-top: 32px;
   margin-left: 140px;
+}
+select{
+  margin-left: 50px;
+  font-size: large;
+  font-weight: bold;
+}
+select:hover{
+  background-color: rgb(255, 45, 45);
 }
 
 /*Random Movie Styling*/
@@ -86,23 +100,20 @@ article:hover{
 }
 h3{
   font-size: larger;
-  color: black;
+  color: rgb(255, 255, 255);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
   font-weight: bolder;
 }
 p{
-  color: rgb(75, 74, 74);
+  color: rgb(0, 0, 0);
+  -webkit-text-stroke-width: .5px;
+  -webkit-text-stroke-color: rgb(255, 255, 255);
 }
 #movie-container{
-  max-width: 1000px;
-  margin:auto
-}
-select{
-  margin-left: 50px;
-  font-size: large;
-  font-weight: bold;
-}
-select:hover{
-  background-color: rgb(255, 45, 45);
+  width:80%;
+  height: 50%;
+  margin: 0 auto;
 }
 
 /*watchlist styling*/
@@ -133,4 +144,15 @@ img{
 
 li::marker{
   color: black;
+}
+
+/*mobile device styling*/
+@-ms-viewport {
+  width: device-width ;
+}
+@media screen and (max-width:320px) {
+  /* CSS for screens that are 320 pixels or less will be put in this section */
+}
+@media screen and (min-width:320px) and (max-width:640px) {
+  /* for screens that are at least 320 pixels wide but less than or equal to 640 pixels wide */
 }
