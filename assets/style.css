@@ -115,6 +115,10 @@ p{
   height: 50%;
   margin: 0 auto;
 }
+#recommendations{
+  resize: both;
+  overflow: auto;
+}
 
 /*watchlist styling*/
 .nextMovie{
