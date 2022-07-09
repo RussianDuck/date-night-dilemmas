@@ -26,6 +26,8 @@ const genreIds = {
     Western: 37,
 };
 
+var movieCards = [];
+
 function getMovies(){
     var genreId = genreIds[$('#selection').val()];
     var requestURL = movieSearchBaseURL + movieSearchAPIKey + movieSearchGenreId + genreId;
@@ -39,8 +41,9 @@ function getMovies(){
         console.log(data);
         for (var i = 0; i<3; i++) {
             var index = getRandomNumber(20);
-            generateCards(data.results[index]);
+            generateCards(data.results[index], i);
         }
+        return movieCards;
         });
 }
 
@@ -94,8 +97,10 @@ function getRecipe() {
         })
 }
 
-function generateCards(result) {
+function generateCards(result, i) {
     let movieCard = document.createElement("article");
+    movieCard.setAttribute('id', 'addToListButton' + i);
+    console.log(movieCard.id);
     movieCard.style.backgroundImage = 'url(' + result.backdrop_path + ')';
     let movieTitle = document.createElement("h3");
     let moviePoster = document.createElement('img');
@@ -126,22 +131,56 @@ function getRandomNumber(max) {
     return Math.floor(Math.random() * (max-min) + min);
 }
 
-// adds desired movie into list and displays it
-function addToList() {
+// adds desired movie into watch list and displays it
+function addOneToList() {
     var nextTitle = document.querySelector("h3").textContent;
+    // var nextPoster = document.querySelector("img");
     var displayMovie = document.querySelector(".nextMovie");
-    displayMovie.textContent = nextTitle;
-    // console.log("Added");
+    displayMovie.innerHTML = nextTitle;
     localStorage.setItem("nextMovie", nextTitle);
         console.log(nextTitle);
 }
 
-// clicking the "add to list" button will activate the addToList function
-$('#add').on('click', function () {
-    addToList();
-}) 
+function addTwoToList() {
+    var nextTitle = document.getElementsByTagName("h3")[1].textContent;
+    // var nextPoster = document.querySelector("img");
+    var displayMovie = document.querySelector(".nextMovie");
+    displayMovie.innerHTML = nextTitle;
+    localStorage.setItem("nextMovie", nextTitle);
+        console.log(nextTitle);
+}
+
+function addThreeToList() {
+    var nextTitle = document.getElementsByTagName("h3")[2].textContent;
+    // var nextPoster = document.querySelector("img");
+    var displayMovie = document.querySelector(".nextMovie");
+    displayMovie.innerHTML = nextTitle;
+    localStorage.setItem("nextMovie", nextTitle);
+        console.log(nextTitle);
+}
+
+// buttons that will add movies into watch list
+$('#addToListButton0').on('click', function () {
+    addOneToList();
+})
+
+$('#addToListButton1').on('click', function () {
+    addTwoToList();
+})
+
+$('#addToListButton2').on('click', function () {
+    addThreeToList();
+})
 
 function clearResults() {
     movieContainerEl.innerHTML = '';
     recipeContainerEl.innerHTML = '';
+    // cocktailContainerEl.innerHTML = '';
+}
+
+// loads and displays localStorage on page
+function loadLocalStorage() {
+    localStorage.getItem("nextMovie");
+    var displayStorage = document.querySelector(".nextMovie")
+    displayStorage.innerHTML = localStorage.nextMovie;
 }
