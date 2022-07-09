@@ -41,10 +41,7 @@ function getMovies(){
         console.log(data);
         for (var i = 0; i<3; i++) {
             var index = getRandomNumber(20);
-            generateCards(data.results[index]);
-            // movieCards[i] = "movie";
-            // movieCards.setAttribute("id", "movie_" + [i]);
-            // console.log(movieCards[i]);
+            generateCards(data.results[index], i);
         }
         return movieCards;
         });
@@ -100,9 +97,9 @@ function getRecipe() {
         })
 }
 
-function generateCards(result) {
+function generateCards(result, i) {
     let movieCard = document.createElement("article");
-    movieCard.setAttribute('id', 'addToListButton');
+    movieCard.setAttribute('id', 'addToListButton' + i);
     console.log(movieCard.id);
     movieCard.style.backgroundImage = 'url(' + result.backdrop_path + ')';
     let movieTitle = document.createElement("h3");
@@ -134,9 +131,9 @@ function getRandomNumber(max) {
     return Math.floor(Math.random() * (max-min) + min);
 }
 
-// adds desired movie into list and displays it
-function addToList() {
-    var nextTitle = document.querySelector("h3").textContent
+// adds desired movie into watch list and displays it
+function addOneToList() {
+    var nextTitle = document.querySelector("h3").textContent;
     // var nextPoster = document.querySelector("img");
     var displayMovie = document.querySelector(".nextMovie");
     displayMovie.innerHTML = nextTitle;
@@ -144,18 +141,36 @@ function addToList() {
         console.log(nextTitle);
 }
 
-// clicking the "add to list" button will activate the addToList function
-// const movieClick = document.getElementById("article");
-// movieClick.setAttribute('id', 'addToListButton');
+function addTwoToList() {
+    var nextTitle = document.getElementsByTagName("h3")[1].textContent;
+    // var nextPoster = document.querySelector("img");
+    var displayMovie = document.querySelector(".nextMovie");
+    displayMovie.innerHTML = nextTitle;
+    localStorage.setItem("nextMovie", nextTitle);
+        console.log(nextTitle);
+}
 
-$('#addToListButton').on('click', function () {
-    alert("Add to list button clicked");
-    addToList();
-}) 
+function addThreeToList() {
+    var nextTitle = document.getElementsByTagName("h3")[2].textContent;
+    // var nextPoster = document.querySelector("img");
+    var displayMovie = document.querySelector(".nextMovie");
+    displayMovie.innerHTML = nextTitle;
+    localStorage.setItem("nextMovie", nextTitle);
+        console.log(nextTitle);
+}
 
-// $('#movie-container').on('click', function () {
-//     addToList();
-// }) 
+// buttons that will add movies into watch list
+$('#addToListButton0').on('click', function () {
+    addOneToList();
+})
+
+$('#addToListButton1').on('click', function () {
+    addTwoToList();
+})
+
+$('#addToListButton2').on('click', function () {
+    addThreeToList();
+})
 
 function clearResults() {
     movieContainerEl.innerHTML = '';
