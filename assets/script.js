@@ -26,6 +26,8 @@ const genreIds = {
     Western: 37,
 };
 
+var movieCards = [];
+
 function getMovies(){
     var genreId = genreIds[$('#selection').val()];
     var requestURL = movieSearchBaseURL + movieSearchAPIKey + movieSearchGenreId + genreId;
@@ -40,7 +42,11 @@ function getMovies(){
         for (var i = 0; i<3; i++) {
             var index = getRandomNumber(20);
             generateCards(data.results[index]);
+            // movieCards[i] = "movie";
+            // movieCards.setAttribute("id", "movie_" + [i]);
+            // console.log(movieCards[i]);
         }
+        return movieCards;
         });
 }
 
@@ -96,6 +102,8 @@ function getRecipe() {
 
 function generateCards(result) {
     let movieCard = document.createElement("article");
+    movieCard.setAttribute('id', 'addToListButton');
+    console.log(movieCard.id);
     movieCard.style.backgroundImage = 'url(' + result.backdrop_path + ')';
     let movieTitle = document.createElement("h3");
     let moviePoster = document.createElement('img');
@@ -129,17 +137,25 @@ function getRandomNumber(max) {
 // adds desired movie into list and displays it
 function addToList() {
     var nextTitle = document.querySelector("h3").textContent
+    // var nextPoster = document.querySelector("img");
     var displayMovie = document.querySelector(".nextMovie");
     displayMovie.innerHTML = nextTitle;
-    // console.log("Added");
     localStorage.setItem("nextMovie", nextTitle);
         console.log(nextTitle);
 }
 
 // clicking the "add to list" button will activate the addToList function
-$('#add').on('click', function () {
+// const movieClick = document.getElementById("article");
+// movieClick.setAttribute('id', 'addToListButton');
+
+$('#addToListButton').on('click', function () {
+    alert("Add to list button clicked");
     addToList();
 }) 
+
+// $('#movie-container').on('click', function () {
+//     addToList();
+// }) 
 
 function clearResults() {
     movieContainerEl.innerHTML = '';
