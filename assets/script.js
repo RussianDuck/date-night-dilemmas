@@ -99,7 +99,6 @@ function getRecipe() {
 
 function generateCards(result, i) {
     let movieCard = document.createElement("article");
-    movieCard.setAttribute('id', 'addToListButton' + i);
     console.log(movieCard.id);
     movieCard.style.backgroundImage = 'url(' + result.backdrop_path + ')';
     let movieTitle = document.createElement("h3");
@@ -111,10 +110,20 @@ function generateCards(result, i) {
     movieYear.textContent = 'Year Released: ' + formattedYear;
     let movieRating = document.createElement("p");
     movieRating.textContent = 'Rating: ' + result.vote_average;
+    let movieButton = document.createElement("button");
+    movieButton.textContent = "Add to Watch List";
+    movieButton.setAttribute('id', 'addToListButton' + i);
+    movieButton.addEventListener('click', function(event){
+            var nextTitle = event.target.parentNode.childNodes[1].textContent;
+            var displayMovie = document.querySelector(".nextMovie");
+            displayMovie.innerHTML = nextTitle;
+            localStorage.setItem("nextMovie", nextTitle);
+    });
     movieCard.appendChild(moviePoster);
     movieCard.appendChild(movieTitle);
     movieCard.appendChild(movieYear);
     movieCard.appendChild(movieRating);
+    movieCard.appendChild(movieButton);
     movieContainerEl.appendChild(movieCard);
 }
 
@@ -130,47 +139,6 @@ function getRandomNumber(max) {
     var max = Math.floor(max);
     return Math.floor(Math.random() * (max-min) + min);
 }
-
-// adds desired movie into watch list and displays it
-function addOneToList() {
-    var nextTitle = document.querySelector("h3").textContent;
-    // var nextPoster = document.querySelector("img");
-    var displayMovie = document.querySelector(".nextMovie");
-    displayMovie.innerHTML = nextTitle;
-    localStorage.setItem("nextMovie", nextTitle);
-        console.log(nextTitle);
-}
-
-function addTwoToList() {
-    var nextTitle = document.getElementsByTagName("h3")[1].textContent;
-    // var nextPoster = document.querySelector("img");
-    var displayMovie = document.querySelector(".nextMovie");
-    displayMovie.innerHTML = nextTitle;
-    localStorage.setItem("nextMovie", nextTitle);
-        console.log(nextTitle);
-}
-
-function addThreeToList() {
-    var nextTitle = document.getElementsByTagName("h3")[2].textContent;
-    // var nextPoster = document.querySelector("img");
-    var displayMovie = document.querySelector(".nextMovie");
-    displayMovie.innerHTML = nextTitle;
-    localStorage.setItem("nextMovie", nextTitle);
-        console.log(nextTitle);
-}
-
-// buttons that will add movies into watch list
-$('#addToListButton0').on('click', function () {
-    addOneToList();
-})
-
-$('#addToListButton1').on('click', function () {
-    addTwoToList();
-})
-
-$('#addToListButton2').on('click', function () {
-    addThreeToList();
-})
 
 function clearResults() {
     movieContainerEl.innerHTML = '';
